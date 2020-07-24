@@ -27,8 +27,9 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
+//"/"엔드프린트
 app.get("/", (req, res) => res.send("Hello World!~~ "));
-//request, response 요청, 응답
+//request, response 요청, 응답. 자리 바꾸면 에러나용
 
 app.get("/api/hello", (req, res) => res.send("Hello World!~~ "));
 
@@ -88,13 +89,17 @@ app.post("/api/users/login", (req, res) => {
   });
 });
 
-// role 1 어드민    role 2 특정 부서 어드민
-// role 0 -> 일반유저   role 0이 아니면  관리자
+//auth 라우터
+
+//auth 미들웨어 추가
+//callback function 가기 전에 중간(미들)에서 무언가를 해주는 것
 app.get("/api/users/auth", auth, (req, res) => {
-  //여기 까지 미들웨어를 통과해 왔다는 얘기는  Authentication 이 True 라는 말.
+  //여기를 통과하였음 = 미들웨어 통과 = Authentication true
+
   res.status(200).json({
-    _id: req.user._id,
-    isAdmin: req.user.role === 0 ? false : true,
+    //필요한 정보를 전달해줍시다.
+    _id: req.user._id, //isAdmin값이 0이면 false(일반유저) 0이 아니면 true(관리자)
+    isAdmin: req.user.role === 0 ? false : true, //role 1은 관리자 0은 일반유저로 줬었음
     isAuth: true,
     email: req.user.email,
     name: req.user.name,
@@ -104,15 +109,19 @@ app.get("/api/users/auth", auth, (req, res) => {
   });
 });
 
+//로그인 된 상태에서 접근하는 페이지이기떄문에 auth 추가해주었음
 app.get("/api/users/logout", auth, (req, res) => {
-  // console.log('req.user', req.user)
+  //로그아웃하려는 유저를 DB에서 찾고
   User.findOneAndUpdate({ _id: req.user._id }, { token: "" }, (err, user) => {
-    if (err) return res.json({ success: false, err });
-    return res.status(200).send({
-      success: true,
-    });
+    if (err) {
+      return res.json({ success: false, err });
+    } else {
+      return res.status(200).send({
+        success: true,
+      });
+    }
   });
-});
+}); //로그아웃하는 유저의 토큰을 지워서{token:""} DB에 업데이트함
 
 const port = 5000;
 
