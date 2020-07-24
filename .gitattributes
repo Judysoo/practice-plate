@@ -1,1 +1,2 @@
-BoilerPlate Korean.html linguist-language=JavaScript
+* linguist-vendored
+*.js linguist-vendored=false
