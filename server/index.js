@@ -32,7 +32,7 @@ app.get('/', (req, res) => res.send('Hello World!~~ '));
 //request, response 요청, 응답. 자리 바꾸면 에러나용
 
 app.get('/api/hello', (req, res) => {
-  res.send('안녕하세욥~ ');
+  res.send('안녕하세욥~ '); //프론트에 response, 콘솔로 받은 것 확인
 });
 
 app.post('/api/users/register', (req, res) => {
