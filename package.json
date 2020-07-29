@@ -7,6 +7,7 @@
     "start": "node server/index.js",
     "nodemonStart": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "front": "cd client && npm start",
     "dev": "concurrently \"npm run start\" \"npm run start --prefix client\""
   },
   "author": "judySoo",
@@ -15,12 +16,12 @@
     "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
-    "cookie-parser": "^1.4.4",
+    "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.8.9"
+    "mongoose": "^5.9.26"
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.4"
   }
 }
