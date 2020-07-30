@@ -1,14 +1,39 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
-
-const LandingPage = () => {
+import { withRouter } from 'react-router-dom';
+function LandingPage(props) {
   useEffect(() => {
-    //index에서 받은 데이터 콘솔에 출력
-    axios.get('/api/hello').then((res) => console.log(res.data));
+    axios.get('http://localhost:5000/api/hello').then((response) => {
+      console.log(response);
+    });
   }, []);
-  return <div>반가워요! 랜딩페이지입니다.</div>;
-};
 
-export default LandingPage;
+  const onClickHandler = () => {
+    axios.get(`/api/users/logout`).then((response) => {
+      if (response.data.success) {
+        props.history.push('/login');
+      } else {
+        alert('로그아웃 하는데 실패했습니다.');
+      }
+    });
+  };
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        height: '100vh',
+      }}
+    >
+      <h2 style={{ display: 'flex' }}>시작 페이지</h2>
+      <button onClick={onClickHandler}>로그아웃</button>
+    </div>
+  );
+}
+
+export default withRouter(LandingPage);
 
 //Cross-Origin Resource Sharing CORS 정책으로 Proxy 사용으로 해결함.
