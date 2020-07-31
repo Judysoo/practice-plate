@@ -3,7 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 function LandingPage(props) {
   useEffect(() => {
-    axios.get('http://localhost:5000/api/hello').then((response) => {
+    axios.get('/api/hello').then((response) => {
       console.log(response);
     });
   }, []);

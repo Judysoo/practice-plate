@@ -8,7 +8,7 @@ import 'antd/dist/antd.css';
 import { applyMiddleware, createStore } from 'redux';
 import promiseMiddleware from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import rootReducer from './_reducer';
+import Reducer from './_reducer';
 
 // 보여주고 싶은 컴포넌트 넣기
 
@@ -22,7 +22,7 @@ const createStoreWithMiddleware = applyMiddleware(
 ReactDOM.render(
   <Provider
     store={createStoreWithMiddleware(
-      rootReducer,
+      Reducer,
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
         window.__REDUX_DEVTOOLS_EXTENSION__(),
       //크롬 웹스토어에서 redux devtools 추가

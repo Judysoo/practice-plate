@@ -27,7 +27,7 @@ const RegisterPage = (props) => {
   };
 
   const onSubmitHandler = (event) => {
-    event.preventDefault();
+    event.preventDefault(); //새로고침 방지
 
     if (Password !== ConfirmPassword) {
       return alert('비밀번호가 같지 않습니다.');

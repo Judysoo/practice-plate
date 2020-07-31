@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../_actions/user_action';
 import { withRouter } from 'react-router-dom';
-function LoginPage(props) {
+import Axios from 'axios';
+  const LoginPage = (props) =>  {
   const dispatch = useDispatch();
 
   const [Email, setEmail] = useState('');
@@ -19,6 +20,13 @@ function LoginPage(props) {
   const onSubmitHandler = (event) => {
     event.preventDefault();
 
+    console.log('Email',Email)
+    console.log('Password',Password)
+    
+    
+    Axios.post('api/user/login')
+
+
     let body = {
       email: Email,
       password: Password,
@@ -28,7 +36,7 @@ function LoginPage(props) {
       if (response.payload.loginSuccess) {
         props.history.push('/');
       } else {
-        alert('로그인 실패');
+        alert('login failed');
       }
     });
   };

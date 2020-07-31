@@ -5,6 +5,7 @@ import './App.css';
 import LandingPage from './components/LandingPage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import Auth from './hoc/auth'
 
 const App = () => {
   return (

@@ -19,7 +19,7 @@ let auth = (req, res, next) => {
       throw err; //유저가 없으면 인증 X
     } else {
       if (!user) {
-        return res.json({ isAuth: false, error: ture });
+        return res.json({ isAuth: false, error: true });
       } else {
         req.token = token; //토큰과 유저 정보를 request에 넣어줌으로써 호출이 쉬워짐
         req.user = user; //재사용성
